@@ -13,7 +13,7 @@ Additionally, we add pooling layers and ReLU activation.
 
 Description about Folders
 ---------------------------------------
-1. Single layer configuration
+## 1. Single layer configuration
 This folder is for running just one single convolutional layer. 
 
 Before you run each layer, **you should modify variable values in cnn.h file.**   
@@ -21,7 +21,7 @@ Please refer to the image below.
  ![factors](https://user-images.githubusercontent.com/31407544/147213681-247cdef7-7372-4c20-9828-a12ae3d00c4d.jpg)
 
 
-2. 5layer_configuration
+## 2. 5layer_configuration
 This folder is a connected version of all VGG convolution layers.
 
 
