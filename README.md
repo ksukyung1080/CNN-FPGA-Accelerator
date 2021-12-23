@@ -7,7 +7,7 @@ We use the architecture of VGG model except for fully connected layers.
 The project goal is minimizing execution time by minimizing DRAM access and optimizing tiling factors for each layer.
 Additionally, we add pooling layers and ReLU activation.
 
-![Alt text] (/Desktop/architecture.jpg)
+![architecture](https://user-images.githubusercontent.com/31407544/147211496-c22d235e-55a1-45c1-b15d-cd455ddbe9f8.jpg)
 
 Build Setup (+ Requirements?)
 ---------------------------------------
