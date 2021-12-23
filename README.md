@@ -1,15 +1,12 @@
 # CNN-FPGA-Accelerator
 
-### Introduction
+Introduction
 ---------------------------------------
-Our CNN-FPGA-Accelerator is an open-source implementation   
-of Convolutional neural network(CNN) accelerator on FPGA.   
+Our CNN-FPGA-Accelerator is an open-source implementation of Convolutional neural network(CNN) accelerator on FPGA.   
 We use the architecture of VGG model except for fully connected layers.   
-The project goal is minimizing execution time by minimizing DRAM access   
-and optimizing tiling factors for each layer.   
+The project goal is minimizing execution time by minimizing DRAM access and optimizing tiling factors for each layer.
 
-
-### Build Setup (+ Requirements?)
+Build Setup (+ Requirements?)
 ---------------------------------------
 aws-fpga-repo-dir  git clone?   
 ```
@@ -20,7 +17,7 @@ aws-fpga-repo-dir  git clone?
 % make run TARGET=hw_emu DEVICE=$AWS_PlATFORM all
 ```
 
-### Results
+Results
 ---------------------------------------
 Execution time for each layer
 - Layer1: Tr=  Tm=   Execution time:
