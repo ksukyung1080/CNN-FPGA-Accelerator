@@ -20,7 +20,12 @@ Build Setup
 % cd $AWS_FPGA_REPO_DIR
 % source vitis_setup.sh
 % source /opt/Xilinx/Vitis_HLS/2021.1/settings64.sh
+% cd $AWS_FPGA_REPO_DIR/Vitis/examples/xilinx
+% mkdir cnn_onboard
 ```
+
+Then, download our entire code(cnn.cpp, cnn.h, host.cpp) in **cnn_onboard folder.**   
+
 
 ### NOTICE
 Before you run each layer, **you should modify variable values in cnn.h file.**   
@@ -29,7 +34,7 @@ Please refer to the image below.
 
 ### Emulation and Run on FPGA
 ```
-% cd [folder path]
+% cd cnn_onboard
 % make cleanall
 % make run TARGET=sw_emu DEVICE=$AWS_PLATFORM all
 % make run TARGET=hw_emu DEVICE=$AWS_PlATFORM all
