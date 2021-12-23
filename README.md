@@ -53,7 +53,7 @@ Then, download one of our folders which one you want to run into **cnn_onboard f
 % cd cnn_onboard
 % make cleanall
 % make run TARGET=sw_emu DEVICE=$AWS_PLATFORM all
-% make run TARGET=hw_emu DEVICE=$AWS_PlATFORM all
+% make run TARGET=hw_emu DEVICE=$AWS_PLATFORM all
 % make run TARGET=hw DEVICE=$AWS_PLATFORM all
 ```
 <br />
