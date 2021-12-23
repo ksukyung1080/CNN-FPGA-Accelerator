@@ -10,6 +10,9 @@ Additionally, we add pooling layers and ReLU activation.
 
 ![architecture](https://user-images.githubusercontent.com/31407544/147211496-c22d235e-55a1-45c1-b15d-cd455ddbe9f8.jpg)
 
+<br />
+<br />
+<br />
 
 # Description about Folders
 
@@ -25,7 +28,9 @@ Please refer to the image below.
 ## 2. 5layer_configuration
 This folder is a connected version of all VGG convolution layers.
 
-
+<br />
+<br />
+<br />
 
 # Build Setup
 
@@ -51,6 +56,9 @@ Then, download one of our folders which one you want to run into **cnn_onboard f
 % make run TARGET=hw_emu DEVICE=$AWS_PlATFORM all
 % make run TARGET=hw DEVICE=$AWS_PLATFORM all
 ```
+<br />
+<br />
+<br />
 
 # Results
 
