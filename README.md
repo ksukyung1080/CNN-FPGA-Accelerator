@@ -11,7 +11,7 @@ Additionally, we add pooling layers and ReLU activation.
 ![architecture](https://user-images.githubusercontent.com/31407544/147211496-c22d235e-55a1-45c1-b15d-cd455ddbe9f8.jpg)
 
 
-Description about Folders
+# Description about Folders
 ---------------------------------------
 ## 1. Single layer configuration
 This folder is for running just one single convolutional layer. 
@@ -19,6 +19,7 @@ This folder is for running just one single convolutional layer.
 Before you run each layer, **you should modify variable values in cnn.h file.**   
 Please refer to the image below.
  ![factors](https://user-images.githubusercontent.com/31407544/147213681-247cdef7-7372-4c20-9828-a12ae3d00c4d.jpg)
+
 
 
 ## 2. 5layer_configuration
