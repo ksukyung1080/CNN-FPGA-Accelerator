@@ -38,10 +38,11 @@ Please refer to the image below.
 
 Results
 ---------------------------------------
-Execution time for each layer
-- Layer1: Tr=  Tm=   
- - Execution time:
-- Layer2:
-- Layer3:
-- Layer4:
-- Layer5: 
+
+| Layer | Execution time | GFLOPS |
+| :---: | :---: | :---: |
+| Layer1 | | |
+| Layer2 | | |
+| Layer3 | | |
+| Layer4 | | |
+| Layer5 | | |
