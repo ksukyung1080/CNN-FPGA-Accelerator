@@ -169,9 +169,6 @@ static void store_result(hls::vector<short, BUSWIDTH> *out, hls::stream<hls::vec
 	hls::vector<short, Tm> tout;
 	hls::vector<short, BUSWIDTH> temp_out;
 	
-	int sss = 0;
-	static short TEMP_OUT[R/2*C/2*M];
-
 	r_loop: for(int row = 0; row < R/2; row+=Tr/2) {
 		c_loop: for(int col = 0; col < C/2; col+=Tc/2) {
 			m_loop: for(int cho = 0; cho < M; cho+=Tm) {
@@ -185,11 +182,12 @@ static void store_result(hls::vector<short, BUSWIDTH> *out, hls::stream<hls::vec
 						wb_tout_m: for (int tm = 0; tm < Tm; tm+=BUSWIDTH) {
 #pragma HLS unroll
 							for(int b = 0; b < BUSWIDTH; b++) {
-#pragma HLS unroll
-								int m = cho + tm;
+#pragma HLS unrol
 								temp_out[b] = tout[tm+b];
-								TEMP_OUT[r*M*C/2 + c*M + m + b] = tout[tm+b];
 							}
+							int m = cho + tm*BUSWIDTH;
+							out[(r*M*C/2 + c*M + m)/BUSWIDTH] = temp_out;
+							
 						}
 					}
 				}
