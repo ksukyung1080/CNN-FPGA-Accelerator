@@ -7,9 +7,11 @@ We use the architecture of VGG model except for fully connected layers.
 The project goal is minimizing execution time by minimizing DRAM access and optimizing tiling factors for each layer.
 Additionally, we add pooling layers and ReLU activation.
 
+
 ![architecture](https://user-images.githubusercontent.com/31407544/147211496-c22d235e-55a1-45c1-b15d-cd455ddbe9f8.jpg)
 
-Build Setup (+ Requirements?)
+
+Build Setup
 ---------------------------------------
 ### Device Setting
 
@@ -19,6 +21,11 @@ Build Setup (+ Requirements?)
 % source vitis_setup.sh
 % source /opt/Xilinx/Vitis_HLS/2021.1/settings64.sh
 ```
+
+# NOTICE
+Before you run each layer, **you should modify variable values in cnn.h file.**
+Please refer to the image below.
+ ![factors](https://user-images.githubusercontent.com/31407544/147213681-247cdef7-7372-4c20-9828-a12ae3d00c4d.jpg)
 
 ### Emulation and Run on FPGA
 ```
