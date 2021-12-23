@@ -72,19 +72,7 @@ static void load_weight(hls::vector<short, BUSWIDTH> *ker, hls::stream<hls::vect
 		}
 	}
 }
-/*
-short Max(short a, short b, short c, short d)
-{
-	DTYPE arr[4] = {a, b, c, d};
-	DTYPE max = 0;
-	for (int ii = 0; ii < 4; ii++) {
-		if(arr[ii] > max) max = arr[ii];
-		else max = max;
-	}	
-	return max;
-}
 
-*/
 
 static void Tiled_cnn(
 		hls::stream<hls::vector<short, Tn>> & ker_stream,
@@ -152,17 +140,16 @@ static void Tiled_cnn(
 											L: tout[tr][tc][tm] += tker[ki][kj][tm][tn] * tinp[tr+ki][tc+kj][tn];
 
 					}}}}}}
-//start
+					// Tilied pooling method(with relu activation)
 					p_tm: for (int pm = 0; pm < Tm; pm++) {
 						p_tr: for (int pr = 0; pr < Tr/2; pr++) {
 							p_tc: for (int pc = 0; pc < Tc/2; pc++) {
-								   int relu = Max(tout[2*pr][2*pc][pm], tout[2*pr][2*pc+1][pm], tout[2*pr+1][2*pc][pm], tout[2*pr+1][2*pc+1][pm]);							
+				
+								   int relu = Max(tout[2*pr][2*pc][pm], tout[2*pr][2*pc+1][pm], tout[2*pr+1][2*pc][pm], tout[2*pr+1][2*pc+1][pm]);		
 								P: maxx[pr][pc][pm] = relu > 0 ? relu : 0;
-							//	printf("%d\n",maxx[pr][pc][pm]);
+				
 				}}}
-//end
 				}
-
 				// Writeback tile of output (Loop promotion)
 				wb_tout_r: for (int tr = 0; tr < Tr/2; tr++) {
 					wb_tout_c: for (int tc = 0; tc < Tc/2; tc++) {
@@ -173,12 +160,11 @@ static void Tiled_cnn(
 						}
 						out_stream.write(temp_out);
 				}}
-
 			
 	}}}
 
 }
-static void store_result(short OUT1[41472], hls::stream<hls::vector<short, Tm>>&out_stream) {
+static void store_result(hls::vector<short, BUSWIDTH> *out, hls::stream<hls::vector<short, Tm>> & out_stream) {
 	
 	hls::vector<short, Tm> tout;
 	hls::vector<short, BUSWIDTH> temp_out;
@@ -204,56 +190,13 @@ static void store_result(short OUT1[41472], hls::stream<hls::vector<short, Tm>>&
 								temp_out[b] = tout[tm+b];
 								TEMP_OUT[r*M*C/2 + c*M + m + b] = tout[tm+b];
 							}
-							//int m = cho + tm*BUSWIDTH;
-							//out[( r*M*C/2 + c*M + m )/BUSWIDTH] = temp_out;
-
 						}
 					}
 				}
 			}
 		}
 	}
-	for(int row = 0; row < (R/2 + (K-1)); row++){
-		for(int col = 0; col < (C/2 + (K-1)); col++){
-			for(int chi = 0; chi < M; chi++) {
-				if(row > 0 && row < (R/2 + (K-1) -1) && col > 0 && col < (C/2 + (K-1) -1)) {
-					OUT1[row*(C/2 + (K-1)) * M + col * M + chi] = TEMP_OUT[(row-1)*C/2*M + (col-1)*M +chi];
-				}
-				else OUT1[row*(C/2 + (K-1))*M + col*M + chi] = 0;
-			}
-		}
-	}
-}
 
-static void store_result_to_host(hls::vector<short, BUSWIDTH>* out, short OUT1[41472]) {
-	hls::vector<short, BUSWIDTH> tout;
-
-		r_loop: for(int row = 0; row < (R/2+(K-1)); row+=Tr/2) {
-		c_loop: for(int col = 0; col < (C/2+(K-1)); col+=Tc/2) {
-			m_loop: for(int cho = 0; cho < M; cho+=Tm) {
-				
-				wb_tout_r: for (int tr = 0; tr < Tr/2; tr++) {
-					int r = row + tr;
-					wb_tout_c: for (int tc = 0; tc < Tc/2; tc++) {
-#pragma HLS pipeline II = 1
-						int c = col + tc;
-						//tout = out_stream.read();
-						wb_tout_m: for (int tm = 0; tm < Tm; tm+=BUSWIDTH) {
-#pragma HLS unroll
-							for(int b = 0; b < BUSWIDTH; b++) {
-#pragma HLS unroll
-								//temp_out[b] = tout[tm+b];
-								tout[b] = OUT1[r * (C / 2 + (K - 1)) * M + c * M + tm + b];
-							}
-							int m = cho + tm*BUSWIDTH;
-							out[( r*M*(C/2+(K-1)) + c*M + m )/BUSWIDTH] = tout;
-
-						}
-					}
-				}
-			}
-		}
-	}
 }
 
 extern "C" {
@@ -267,8 +210,6 @@ void cnn(
 #pragma HLS INTERFACE m_axi port = ker bundle = gmem1
 #pragma HLS INTERFACE m_axi port = out bundle = gmem3
 
-	static short OUT1[41472];
-
 	static hls::stream<hls::vector<short, Tn> > inp_stream("input_stream");
 	static hls::stream<hls::vector<short, Tn> > ker_stream("weight_stream");
 	static hls::stream<hls::vector<short, Tm> > out_stream("output_stream");
@@ -278,8 +219,7 @@ void cnn(
 	load_weight(ker, ker_stream);
 	load_input(inp, inp_stream);
 	Tiled_cnn(ker_stream, inp_stream, out_stream);
-	store_result(OUT1, out_stream);
-	store_result_to_host(out, OUT1);
+	store_result(out, out_stream);
 
 }
 
