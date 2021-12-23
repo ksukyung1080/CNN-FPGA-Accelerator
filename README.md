@@ -23,7 +23,7 @@ Build Setup
 ```
 
 # NOTICE
-Before you run each layer, **you should modify variable values in cnn.h file.**
+Before you run each layer, **you should modify variable values in cnn.h file.**   
 Please refer to the image below.
  ![factors](https://user-images.githubusercontent.com/31407544/147213681-247cdef7-7372-4c20-9828-a12ae3d00c4d.jpg)
 
