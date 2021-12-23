@@ -5,6 +5,9 @@ Introduction
 Our CNN-FPGA-Accelerator is an open-source implementation of Convolutional neural network(CNN) accelerator on FPGA.   
 We use the architecture of VGG model except for fully connected layers.   
 The project goal is minimizing execution time by minimizing DRAM access and optimizing tiling factors for each layer.
+Additionally, we add pooling layers and ReLU activation.
+
+![Alt text] (/Desktop/architecture.jpg)
 
 Build Setup (+ Requirements?)
 ---------------------------------------
