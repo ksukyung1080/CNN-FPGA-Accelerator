@@ -12,7 +12,7 @@ Additionally, we add pooling layers and ReLU activation.
 
 
 # Description about Folders
----------------------------------------
+
 ## 1. Single layer configuration
 This folder is for running just one single convolutional layer. 
 
