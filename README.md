@@ -11,19 +11,29 @@ Additionally, we add pooling layers and ReLU activation.
 
 Build Setup (+ Requirements?)
 ---------------------------------------
-aws-fpga-repo-dir  git clone?   
+### Device Setting
+
 ```
-% source setup.sh
+% git clone https://github.com/aws/aws-fpga.git $AWS_FPGA_REPO_DIR
+% cd $AWS_FPGA_REPO_DIR
+% source vitis_setup.sh
+% source /opt/Xilinx/Vitis_HLS/2021.1/settings64.sh
+```
+
+### Emulation and Run on FPGA
+```
 % cd [folder path]
 % make cleanall
 % make run TARGET=sw_emu DEVICE=$AWS_PLATFORM all
 % make run TARGET=hw_emu DEVICE=$AWS_PlATFORM all
+% make run TARGET=hw DEVICE=$AWS_PLATFORM all
 ```
 
 Results
 ---------------------------------------
 Execution time for each layer
-- Layer1: Tr=  Tm=   Execution time:
+- Layer1: Tr=  Tm=   
+ - Execution time:
 - Layer2:
 - Layer3:
 - Layer4:
