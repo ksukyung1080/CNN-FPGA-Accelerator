@@ -64,3 +64,7 @@ Then, download one of our folders which one you want to run into **cnn_onboard f
 
 
 ![result](https://user-images.githubusercontent.com/31407544/147215283-55ffffaa-3388-41ef-819f-5ac907961913.jpg)
+
+
+# Collaborator
+[이정혁](https://github.com/DinnerL)
